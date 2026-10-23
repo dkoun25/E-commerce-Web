@@ -1,0 +1,11 @@
+.vs/
+bin/
+obj/
+wwwroot/uploads/*
+!wwwroot/uploads/.gitkeep
+appsettings.Local.json
+node_modules/
+.next/
+.env
+.env.*
+!.env.example
