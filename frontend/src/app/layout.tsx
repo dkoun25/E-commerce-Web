@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 
-// @ts-expect-error Next.js globally handles global CSS imports in the app router.
 import './globals.css';
 
 export const metadata: Metadata = {
