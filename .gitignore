@@ -1,13 +1,12 @@
 .vs/
 bin/
 obj/
-wwwroot/uploads/*
-!wwwroot/uploads/.gitkeep
-appsettings.Local.json
 node_modules/
 .next/
+.vercel/
+appsettings.json
+appsettings.Development.json
+appsettings.Local.json
 .env
 .env.*
 !.env.example
-appsettings.json
-appsettings.Development.json
