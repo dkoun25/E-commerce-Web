@@ -51,7 +51,7 @@ public class ImageStorage
     {
         var req = new HttpRequestMessage(method, $"{_supaUrl}/storage/v1/object/{objectPath}");
         req.Headers.TryAddWithoutValidation("apikey", _supaKey);
-        if (!_supaKey!.StartsWith("sb_")) req.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _supaKey);
+        req.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _supaKey);
         return req;
     }
 
