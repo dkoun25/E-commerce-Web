@@ -361,6 +361,7 @@ h3 {
 }
 
 .nav-in {
+  min-width:0;
   display:flex;
   align-items:center;
   gap:8px;
@@ -368,9 +369,10 @@ h3 {
 
 .catmenu {
   position:relative;
+  flex:none;
 }
 
-.catmenu summary {
+.catmenu-btn {
   list-style:none;
   cursor:pointer;
   display:flex;
@@ -384,11 +386,7 @@ h3 {
   border-radius:var(--r) var(--r) 0 0;
 }
 
-.catmenu summary::-webkit-details-marker {
-  display:none;
-}
-
-.catmenu summary svg {
+.catmenu-btn svg {
   width:18px;
   height:18px;
 }
@@ -420,6 +418,8 @@ h3 {
 }
 
 .nav-links {
+  flex:1;
+  min-width:0;
   display:flex;
   gap:4px;
   overflow-x:auto;
@@ -744,7 +744,6 @@ h3 {
 .pcard h3 {
   font-size:.93rem;
   display:-webkit-box;
-  line-clamp:2;
   -webkit-line-clamp:2;
   -webkit-box-orient:vertical;
   overflow:hidden;
@@ -1419,8 +1418,20 @@ textarea {
   .fgrid {
     grid-template-columns:1fr;
   }
+  .catmenu-btn {
+    padding:0 12px;
+    font-size:.92rem;
+  }
   .catmenu ul {
-    width:min(280px,90vw);
+    width:min(300px,calc(100vw - 24px));
+  }
+  .float-contact {
+    right:10px;
+    bottom:calc(14px + env(safe-area-inset-bottom,0px));
+  }
+  .float-contact a {
+    width:44px;
+    height:44px;
   }
 }
 
@@ -1429,4 +1440,68 @@ textarea {
     transition:none!important;
     scroll-behavior:auto!important;
   }
+}
+
+.catmenu-btn {
+  white-space:nowrap;
+  -webkit-user-select:none;
+  user-select:none;
+  -webkit-tap-highlight-color:transparent;
+}
+.catmenu ul {
+  max-height:min(70vh,440px);
+  overflow-y:auto;
+  overscroll-behavior:contain;
+}
+.catmenu li a {
+  gap:10px;
+}
+.catmenu li a span {
+  min-width:0;
+  overflow-wrap:anywhere;
+}
+.catmenu li a small {
+  flex:none;
+}
+
+.float-contact {
+  position:fixed;
+  right:16px;
+  bottom:calc(20px + env(safe-area-inset-bottom,0px));
+  z-index:45;
+  display:grid;
+  gap:10px;
+}
+.float-contact a {
+  width:48px;
+  height:48px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  color:#fff;
+  font-weight:700;
+  font-size:.78rem;
+  box-shadow:0 6px 16px rgba(20,30,50,.28);
+  transition:transform .15s;
+}
+.float-contact a:hover {
+  transform:scale(1.08);
+  color:#fff;
+}
+.float-contact .fc-zalo {
+  background:#0068ff;
+}
+.float-contact .fc-fb {
+  background:#1877f2;
+}
+.float-contact .fc-tel {
+  background:#17803d;
+}
+.float-contact svg {
+  width:24px;
+  height:24px;
+}
+.float-contact .fc-fb svg {
+  fill:#fff;
+  stroke:none;
 }
