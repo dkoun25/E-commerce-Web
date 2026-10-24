@@ -181,7 +181,13 @@ public class AdminMediaController : ControllerBase
         catch (Exception ex)
         {
             _log.LogError(ex, "Upload ảnh thất bại");
-            return StatusCode(502, new { message = "Không lưu được ảnh lên kho lưu trữ. Kiểm tra cấu hình Supabase Storage." });
+            var detail = ex switch
+            {
+                HttpRequestException => " Không kết nối được Supabase, kiểm tra Supabase__Url.",
+                InvalidOperationException => " Chi tiết: " + (ex.Message.Length > 300 ? ex.Message[..300] : ex.Message),
+                _ => ""
+            };
+            return StatusCode(502, new { message = "Không lưu được ảnh lên kho lưu trữ." + detail });
         }
         var original = Path.GetFileName(file.FileName);
         if (original.Length > 150) original = original[..150];

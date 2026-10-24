@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import type { ReactNode } from 'react';
 
 import './globals.css';
 
@@ -7,7 +8,7 @@ export const metadata: Metadata = {
   description: 'Aura Tech - CPU, card đồ họa, mainboard, RAM, SSD, nguồn, tản nhiệt, vỏ case, màn hình và gaming gear.'
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="vi">
       <head>

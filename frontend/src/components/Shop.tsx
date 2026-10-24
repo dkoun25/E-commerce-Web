@@ -1,5 +1,6 @@
 'use client';
 
+import type { ReactNode } from 'react';
 import Link from 'next/link';
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { API, imgSrc } from '@/lib/api';
@@ -45,7 +46,7 @@ function readStorage(): CartLine[] {
   }
 }
 
-export function ShopProvider({ children }: { children: React.ReactNode }) {
+export function ShopProvider({ children }: { children: ReactNode }) {
   const [lines, setLines] = useState<CartLine[]>([]);
   const [ready, setReady] = useState(false);
   const [open, setOpen] = useState(false);
