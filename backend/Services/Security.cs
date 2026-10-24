@@ -33,14 +33,22 @@ public class TokenService
     private readonly IConfiguration _cfg;
     public TokenService(IConfiguration cfg) { _cfg = cfg; }
 
+    public static class JwtDefaults
+    {
+        public static string Issuer(IConfiguration c) =>
+            string.IsNullOrWhiteSpace(c["Jwt:Issuer"]) ? "aura-tech" : c["Jwt:Issuer"]!;
+        public static string Audience(IConfiguration c) =>
+            string.IsNullOrWhiteSpace(c["Jwt:Audience"]) ? "aura-tech-admin" : c["Jwt:Audience"]!;
+    }
+
     public (string Token, DateTime ExpiresAt) Create(string username)
     {
         var hours = _cfg.GetValue("Jwt:ExpireHours", 8);
         var expires = DateTime.UtcNow.AddHours(hours);
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_cfg["Jwt:Key"]!));
         var jwt = new JwtSecurityToken(
-            issuer: _cfg["Jwt:Issuer"],
-            audience: _cfg["Jwt:Audience"],
+            issuer: JwtDefaults.Issuer(_cfg),
+            audience: JwtDefaults.Audience(_cfg),
             claims: new[] { new Claim(ClaimTypes.Name, username), new Claim(ClaimTypes.Role, "Admin") },
             expires: expires,
             signingCredentials: new SigningCredentials(key, SecurityAlgorithms.HmacSha256));
